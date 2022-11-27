@@ -93,7 +93,9 @@ else
 HOST_GO_CGO_ENABLED = 0
 endif
 else # !BR2_PACKAGE_HOST_GO_TARGET_ARCH_SUPPORTS
-ifeq ($(BR2_PACKAGE_HOST_GO_HOST_CGO_LINKING_SUPPORTS),y)
+# If the target arch does not support go, host-go can still be used to build
+# packages for the host, and enable cgo. No need to set all the arch stuff
+#since we will not be cross-compiling.
 HOST_GO_CGO_ENABLED = 1
 else # !BR2_PACKAGE_HOST_GO_HOST_CGO_LINKING_SUPPORTS
 HOST_GO_CGO_ENABLED = 0
