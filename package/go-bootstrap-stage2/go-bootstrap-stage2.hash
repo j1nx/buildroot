@@ -1,3 +1,7 @@
 # From https://go.dev/dl
+<<<<<<< HEAD
 sha256  e25c9ab72d811142b7f41ff6da5165fec2d1be5feec3ef2c66bc0bdecb431489  go1.19.11.src.tar.gz
+=======
+sha256  8e486e8e85a281fc5ce3f0bedc5b9d2dbf6276d7db0b25d3ec034f313da0375f  go1.19.5.src.tar.gz
+>>>>>>> 56066b2b90 (package/go-bootstrap: split into two stages: go1.4 and go1.19.5)
 sha256  2d36597f7117c38b006835ae7f537487207d8ec407aa9d9980794b2030cbc067  LICENSE
