@@ -401,6 +401,7 @@ F:	package/libdvdcss/
 F:	package/libdvdnav/
 F:	package/libdvdread/
 F:	package/libebur128/
+F:	package/libfribidi/
 F:	package/libfreeglut/
 F:	package/libfribidi/
 F:	package/libg7221/
@@ -475,6 +476,7 @@ F:	package/perl-uri/
 F:	package/perl-www-robotrules/
 F:	package/php/
 F:	package/pngquant/
+F:	package/pound/
 F:	package/pppd/
 F:	package/privoxy/
 F:	package/pure-ftpd/
@@ -492,9 +494,11 @@ F:	package/python-requests-oauthlib/
 F:	package/python-slob/
 F:	package/rrdtool/
 F:	package/rsync/
+F:	package/rrdtool/
 F:	package/rtmpdump/
 F:	package/samba4/
 F:	package/sofia-sip/
+F:	package/softether/
 F:	package/spandsp/
 F:	package/sqlite/
 F:	package/stellarium/
@@ -505,6 +509,8 @@ F:	package/transmission/
 F:	package/tvheadend/
 F:	package/unixodbc/
 F:	package/vlc/
+F:	package/vnstat/
+F:	package/waylandpp/
 F:	package/wget/
 F:	package/wireless-regdb/
 F:	package/wireless_tools/
