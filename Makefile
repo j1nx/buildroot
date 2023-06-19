@@ -91,6 +91,7 @@ all:
 
 # Set and export the version string
 export BR2_VERSION := 2023.02.2
+
 # Actual time the release is cut (for reproducible builds)
 BR2_VERSION_EPOCH = 1686923000
 
