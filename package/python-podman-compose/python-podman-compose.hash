@@ -1,0 +1,5 @@
+# md5, sha256 from https://pypi.org/pypi/podman-compose/json
+md5  664c220817f2f3fa67b7cc13a819ee07  podman-compose-1.0.6.tar.gz
+sha256  2db235049fca50a5a4ffd511a917808c960dacb8defd5481dd8b36a77d4da2e5  podman-compose-1.0.6.tar.gz
+# Locally computed sha256 checksums
+sha256  8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643  LICENSE
