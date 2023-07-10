@@ -9,7 +9,6 @@ CONMON_SITE = $(call github,containers,conmon,v$(CONMON_VERSION))
 CONMON_LICENSE = Apache-2.0
 CONMON_LICENSE_FILES = LICENSE
 
-<<<<<<< HEAD
 CONMON_DEPENDENCIES = host-pkgconf libglib2
 
 ifeq ($(BR2_PACKAGE_LIBSECCOMP)$(BR2_TOOLCHAIN_HEADERS_AT_LEAST_5_0):$(BR2_STATIC_LIBS),yy:)
@@ -21,19 +20,6 @@ endif
 
 define CONMON_CONFIGURE_CMDS
 	printf '#!/bin/bash\necho "$(CONMON_DISABLE_SECCOMP)"\n' > \
-=======
-CONMON_DEPENDENCIES += host-pkgconf libglib2
-
-ifeq ($(BR2_PACKAGE_LIBSECCOMP),y)
-CONMON_ENABLE_SECCOMP = 1
-CONMON_DEPENDENCIES += libseccomp
-else
-CONMON_ENABLE_SECCOMP = 0
-endif
-
-define CONMON_CONFIGURE_CMDS
-	printf '#!/bin/bash\necho "$(CONMON_ENABLE_SECCOMP)"\n' > \
->>>>>>> c2ae77cfb4 (package/conmon: new package)
 		$(@D)/hack/seccomp-notify.sh
 	chmod +x $(@D)/hack/seccomp-notify.sh
 endef
