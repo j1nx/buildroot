@@ -401,7 +401,6 @@ F:	package/libdvdcss/
 F:	package/libdvdnav/
 F:	package/libdvdread/
 F:	package/libebur128/
-F:	package/libfribidi/
 F:	package/libfreeglut/
 F:	package/libfribidi/
 F:	package/libg7221/
@@ -495,6 +494,7 @@ F:	package/python-slob/
 F:	package/rrdtool/
 F:	package/rsync/
 F:	package/rrdtool/
+F:	package/rsync/
 F:	package/rtmpdump/
 F:	package/samba4/
 F:	package/sofia-sip/
