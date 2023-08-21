@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-PODMAN_VERSION = 4.1.1
+PODMAN_VERSION = 4.5.1
 PODMAN_SITE = $(call github,containers,podman,v$(PODMAN_VERSION))
 PODMAN_LICENSE = Apache-2.0
 PODMAN_LICENSE_FILES = LICENSE
@@ -12,13 +12,11 @@ PODMAN_LICENSE_FILES = LICENSE
 PODMAN_CPE_ID_VENDOR = podman_project
 PODMAN_GOMOD = github.com/containers/podman/v4
 
-PODMAN_BUILD_TARGETS = cmd/podman cmd/rootlessport
-PODMAN_DEPENDENCIES += libgpgme
+PODMAN_BUILD_TARGETS = cmd/podman cmd/rootlessport cmd/quadlet
+PODMAN_DEPENDENCIES += libglib2 libgpgme
 PODMAN_LDFLAGS = \
 	-X $(PODMAN_GOMOD)/libpod/define.gitCommit=$(PODMAN_VERSION)
-PODMAN_TAGS = \
-	btrfs_noversion containers_image_openpgp \
-	exclude_graphdriver_devicemapper exclude_graphdriver_zfs
+PODMAN_TAGS = exclude_graphdriver_zfs
 
 ifeq ($(BR2_INIT_SYSTEMD),y)
 PODMAN_TAGS += systemd
