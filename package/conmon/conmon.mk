@@ -4,18 +4,18 @@
 #
 ################################################################################
 
-CONMON_VERSION = 2.1.3
+CONMON_VERSION = 2.1.7
 CONMON_SITE = $(call github,containers,conmon,v$(CONMON_VERSION))
 CONMON_LICENSE = Apache-2.0
 CONMON_LICENSE_FILES = LICENSE
 
-CONMON_DEPENDENCIES += host-pkgconf libglib2
+CONMON_DEPENDENCIES = host-pkgconf libglib2
 
 ifeq ($(BR2_PACKAGE_LIBSECCOMP),y)
 CONMON_DISABLE_SECCOMP = 0
 CONMON_DEPENDENCIES += libseccomp
 else
-CONMON_ENABLE_SECCOMP = 1
+CONMON_DISABLE_SECCOMP = 1
 endif
 
 define CONMON_CONFIGURE_CMDS
