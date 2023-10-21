@@ -12,10 +12,7 @@ GO_LICENSE = BSD-3-Clause
 GO_LICENSE_FILES = LICENSE
 GO_CPE_ID_VENDOR = golang
 
-<<<<<<< HEAD
-=======
 HOST_GO_DEPENDENCIES = host-go-bootstrap-stage2
->>>>>>> 593454c77e542ca7f6924087376ad0de71412e49
 HOST_GO_GOPATH = $(HOST_DIR)/share/go-path
 HOST_GO_HOST_CACHE = $(HOST_DIR)/share/host-go-cache
 HOST_GO_ROOT = $(HOST_DIR)/lib/go
@@ -135,10 +132,7 @@ HOST_GO_HOST_ENV = \
 HOST_GO_MAKE_ENV = \
 	GO111MODULE=off \
 	GOCACHE=$(HOST_GO_HOST_CACHE) \
-<<<<<<< HEAD
-=======
 	GOROOT_BOOTSTRAP=$(HOST_GO_BOOTSTRAP_STAGE2_ROOT) \
->>>>>>> 593454c77e542ca7f6924087376ad0de71412e49
 	GOROOT_FINAL=$(HOST_GO_ROOT) \
 	GOROOT="$(@D)" \
 	GOBIN="$(@D)/bin" \
@@ -174,11 +168,7 @@ define HOST_GO_INSTALL_CMDS
 	cp -a $(@D)/pkg/include $(HOST_GO_ROOT)/pkg/
 	cp -a $(@D)/pkg/tool $(HOST_GO_ROOT)/pkg/
 
-<<<<<<< HEAD
-	# https://golang.org/issue/2775
-=======
 	# The Go sources must be installed to the host/ tree for the Go stdlib.
->>>>>>> 593454c77e542ca7f6924087376ad0de71412e49
 	cp -a $(@D)/src $(HOST_GO_ROOT)/
 
 	# Set file timestamps to prevent the Go compiler from rebuilding the stdlib
