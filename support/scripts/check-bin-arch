@@ -28,6 +28,9 @@ declare -a IGNORES=(
 
 	# Guile modules are ELF files, with a "None" machine
 	"/usr/lib/guile"
+
+	# Ignore containers within ovos home
+	"/home/ovos/.local/share/containers/storage"
 )
 
 while getopts p:l:r:a:i: OPT ; do
