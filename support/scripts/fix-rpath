@@ -56,7 +56,7 @@ EOF
 # ELF files should not be in these sub-directories
 HOST_EXCLUDEPATHS="/share/terminfo"
 STAGING_EXCLUDEPATHS="/usr/include /usr/share/terminfo"
-TARGET_EXCLUDEPATHS="/lib/firmware"
+TARGET_EXCLUDEPATHS="/lib/firmware /home/ovos/.local/share/containers/storage"
 
 main() {
     local rootdir

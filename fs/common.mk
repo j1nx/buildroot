@@ -168,6 +168,7 @@ $$(BINARIES_DIR)/$$(ROOTFS_$(2)_FINAL_IMAGE_NAME): $$(ROOTFS_$(2)_DEPENDENCIES)
 	rm -rf $$(ROOTFS_$(2)_DIR)
 	mkdir -p $$(ROOTFS_$(2)_DIR)
 	rsync -auH \
+		--exclude=/home \
 		--exclude=/$$(notdir $$(TARGET_DIR_WARNING_FILE)) \
 		$$(BASE_TARGET_DIR)/ \
 		$$(TARGET_DIR)
