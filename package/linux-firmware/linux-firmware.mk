@@ -11,6 +11,19 @@ LINUX_FIRMWARE_INSTALL_IMAGES = YES
 
 LINUX_FIRMWARE_CPE_ID_VENDOR = kernel
 
+LINUX_FIRMWARE_COMPRESSED_FILE_SUFFIX=
+ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS_XZ),y)
+LINUX_FIRMWARE_DEPENDENCIES += host-xz
+LINUX_FIRMWARE_COMPRESS_CMD=$(HOST_DIR)/bin/xz -fv -C crc32 --lzma2=dict=2MiB
+LINUX_FIRMWARE_COMPRESSED_FILE_SUFFIX=.xz
+else
+ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS_ZSTD),y)
+LINUX_FIRMWARE_DEPENDENCIES += host-zstd
+LINUX_FIRMWARE_COMPRESS_CMD=$(HOST_DIR)/bin/zstd -f -19 --rm
+LINUX_FIRMWARE_COMPRESSED_FILE_SUFFIX=.zst
+endif
+endif
+
 # Intel SST DSP
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_INTEL_SST_DSP),y)
 LINUX_FIRMWARE_FILES += intel/fw_sst_0f28.bin-48kHz_i2s_master
@@ -25,11 +38,6 @@ endif
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_I915),y)
 LINUX_FIRMWARE_DIRS += i915
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENSE.i915
-endif
-
-ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_NVIDIA),y)
-LINUX_FIRMWARE_DIRS += nvidia
-LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.nvidia
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_RADEON),y)
@@ -364,7 +372,7 @@ endif
 
 # MT7601
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_MEDIATEK_MT7601U),y)
-LINUX_FIRMWARE_FILES += mt7601u.bin
+LINUX_FIRMWARE_FILES += mediatek/mt7601u.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.ralink_a_mediatek_company_firmware
 endif
 
@@ -376,13 +384,13 @@ endif
 
 # MT7650
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_MEDIATEK_MT7650),y)
-LINUX_FIRMWARE_FILES += mt7650.bin
+LINUX_FIRMWARE_FILES += mediatek/mt7650.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.ralink_a_mediatek_company_firmware
 endif
 
 # MT76x2e
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_MEDIATEK_MT76X2E),y)
-LINUX_FIRMWARE_FILES += mt7662.bin mt7662_rom_patch.bin
+LINUX_FIRMWARE_FILES += mediatek/mt7662.bin mediatek/mt7662_rom_patch.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.ralink_a_mediatek_company_firmware
 endif
 
@@ -486,12 +494,22 @@ LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENSE.QualcommAtheros_ath10k
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_22000),y)
-LINUX_FIRMWARE_FILES += iwlwifi-QuZ-*.ucode iwlwifi-Qu-*.ucode
-LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
-endif
-
-ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_22260),y)
-LINUX_FIRMWARE_FILES += iwlwifi-cc-a0-*.ucode
+LINUX_FIRMWARE_FILES += \
+	iwlwifi-Qu-b0-hr-b0-72.ucode \
+	iwlwifi-Qu-c0-hr-b0-72.ucode \
+	iwlwifi-Qu-b0-jf-b0-72.ucode \
+	iwlwifi-Qu-c0-jf-b0-72.ucode \
+	iwlwifi-QuZ-a0-hr-b0-72.ucode \
+	iwlwifi-QuZ-a0-jf-b0-72.ucode \
+	iwlwifi-cc-a0-72.ucode \
+	iwlwifi-so-a0-jf-b0-72.ucode \
+	iwlwifi-so-a0-hr-b0-72.ucode \
+	iwlwifi-so-a0-gf-a0-72.ucode \
+	iwlwifi-so-a0-gf-a0.pnvm \
+	iwlwifi-so-a0-gf4-a0-72.ucode \
+	iwlwifi-so-a0-gf4-a0.pnvm \
+	iwlwifi-ty-a0-gf-a0-72.ucode \
+	iwlwifi-ty-a0-gf-a0.pnvm
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
@@ -580,6 +598,12 @@ LINUX_FIRMWARE_FILES += tigon/*
 # which is installed unconditionally
 endif
 
+ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_BNX2),y)
+LINUX_FIRMWARE_FILES += bnx2/*
+# No license file; the license is in the file WHENCE
+# which is installed unconditionally
+endif
+
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_BNX2X),y)
 LINUX_FIRMWARE_FILES += bnx2x/*
 # No license file; the license is in the file WHENCE
@@ -629,16 +653,6 @@ LINUX_FIRMWARE_FILES += \
 	rtl_nic/rtl8156a-2.fw \
 	rtl_nic/rtl8156b-2.fw
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.rtlwifi_firmware.txt
-endif
-
-ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_ROCKCHIP_DPTX),y)
-LINUX_FIRMWARE_FILES += rockchip/dptx.bin
-LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.rockchip
-endif
-
-ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_TI_VPDMA),y)
-LINUX_FIRMWARE_FILES += ti/vpdma-1b8.bin
-LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.ti-tspa
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_RTL_8169),y)
@@ -884,15 +898,34 @@ LINUX_FIRMWARE_LICENSE_FILES = $(sort $(LINUX_FIRMWARE_ALL_LICENSE_FILES))
 # sure we canonicalize the pointed-to file, to cover the symlinks of the form
 # a/foo -> ../b/foo  where a/ (the directory where to put the symlink) does
 # not yet exist.
+#
+# If BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS is enabled, modules are compressed
+# in this stage after being copied to the target directory. The compression
+# is not done on modules in the images directory, because they must not be
+# compressed when bundled via the EXTRA_FIRMWARE option.
+#
+# $1: target directory
+# $2: 'images' (uncompressed) or 'target' (compressed if enabled)
 define LINUX_FIRMWARE_INSTALL_FW
 	mkdir -p $(1)
 	$(TAR) xf $(@D)/br-firmware.tar -C $(1)
+	if [ "$(BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS)" = "y" ] && [ "$(2)" = "target" ]; then \
+		$(TAR) tf $(@D)/br-firmware.tar | while read f; do \
+			if [ -f $(1)/$$f ]; then \
+				$(LINUX_FIRMWARE_COMPRESS_CMD) $(1)/$$f; \
+			fi ; \
+		done ; \
+	fi
 	cd $(1) ; \
+	file_suffix="" ; \
+	if [ "$(BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS)" = "y" ] && [ "$(2)" = "target" ]; then \
+		file_suffix="$(LINUX_FIRMWARE_COMPRESSED_FILE_SUFFIX)" ; \
+	fi ; \
 	sed -r -e '/^Link: (.+) -> (.+)$$/!d; s//\1 \2/' $(@D)/WHENCE | \
 	while read f d; do \
-		if test -f $$(readlink -m $$(dirname "$$f")/$$d); then \
+		if test -f $$(readlink -m $$(dirname "$$f")/$${d}$${file_suffix}); then \
 			mkdir -p $$(dirname "$$f") || exit 1; \
-			ln -sf $$d "$$f" || exit 1; \
+			ln -sf $${d}$${file_suffix} "$${f}$${file_suffix}" || exit 1; \
 		fi ; \
 	done
 endef
@@ -900,11 +933,22 @@ endef
 endif  # LINUX_FIRMWARE_FILES || LINUX_FIRMWARE_DIRS
 
 define LINUX_FIRMWARE_INSTALL_TARGET_CMDS
-	$(call LINUX_FIRMWARE_INSTALL_FW, $(TARGET_DIR)/lib/firmware)
+	$(call LINUX_FIRMWARE_INSTALL_FW,$(TARGET_DIR)/lib/firmware,target)
 endef
 
 define LINUX_FIRMWARE_INSTALL_IMAGES_CMDS
-	$(call LINUX_FIRMWARE_INSTALL_FW, $(BINARIES_DIR))
+	$(call LINUX_FIRMWARE_INSTALL_FW,$(BINARIES_DIR),images)
+endef
+
+define LINUX_FIRMWARE_LINUX_CONFIG_FIXUPS
+	$(if $(BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS_XZ),
+		$(call KCONFIG_ENABLE_OPT,CONFIG_FW_LOADER_COMPRESS)
+		$(call KCONFIG_ENABLE_OPT,CONFIG_FW_LOADER_COMPRESS_XZ)
+		$(call KCONFIG_DISABLE_OPT,CONFIG_FW_LOADER_COMPRESS_ZSTD))
+	$(if $(BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS_ZSTD),
+		$(call KCONFIG_ENABLE_OPT,CONFIG_FW_LOADER_COMPRESS)
+		$(call KCONFIG_DISABLE_OPT,CONFIG_FW_LOADER_COMPRESS_XZ)
+		$(call KCONFIG_ENABLE_OPT,CONFIG_FW_LOADER_COMPRESS_ZSTD))
 endef
 
 $(eval $(generic-package))
