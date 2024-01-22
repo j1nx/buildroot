@@ -1,0 +1,10 @@
+config BR2_PACKAGE_NETAVARK
+	bool "netavark"
+	depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
+#	depends on BR2_PACKAGE_PROTOBUF
+	select BR2_PACKAGE_HOST_CARGO
+	select BR2_PACKAGE_PROTOBUF
+        help
+	  Netavark is a rust based network stack for containers. 
+          It is being designed to work with Podman but is also 
+          applicable for other OCI container management applications.
