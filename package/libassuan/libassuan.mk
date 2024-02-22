@@ -15,4 +15,11 @@ LIBASSUAN_CONF_OPTS = \
 	--with-gpg-error-prefix=$(STAGING_DIR)/usr
 LIBASSUAN_CONFIG_SCRIPTS = libassuan-config
 
+HOST_LIBASSUAN_DEPENDENCIES = host-libgpg-error
+HOST_LIBASSUAN_CONFIG_SCRIPTS = libassuan-config
+HOST_LIBASSUAN_CONF_OPTS = --with-gpg-error-prefix=$(HOST_DIR)
+
+HOST_LIBASSUAN_CONF_ENV += GPGRT_CONFIG=$(HOST_DIR)/bin/gpgrt-config
+
 $(eval $(autotools-package))
+$(eval $(host-autotools-package))

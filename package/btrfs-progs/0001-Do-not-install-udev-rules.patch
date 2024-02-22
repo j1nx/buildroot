@@ -1,0 +1,27 @@
+From 914e311abf984cb3d5e3d46f4800f35b50f872d6 Mon Sep 17 00:00:00 2001
+From: j1nx <p.steenbergen@j1nx.nl>
+Date: Thu, 22 Feb 2024 12:30:03 +0000
+Subject: [PATCH 1/1] Do not install udev rules
+
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 1223ba6..5573647 100644
+--- a/Makefile
++++ b/Makefile
+@@ -822,8 +822,8 @@ ifeq ($(BUILD_PROGRAMS),1)
+ 	# btrfsck is a link to btrfs in the src tree, make it so for installed file as well
+ 	$(LN_S) -f btrfs $(DESTDIR)$(bindir)/btrfsck
+ ifneq ($(udevdir),)
+-	$(INSTALL) -m755 -d $(DESTDIR)$(udevruledir)
+-	$(INSTALL) -m644 $(udev_rules) $(DESTDIR)$(udevruledir)
++	#$(INSTALL) -m755 -d $(DESTDIR)$(udevruledir)
++	#$(INSTALL) -m644 $(udev_rules) $(DESTDIR)$(udevruledir)
+ endif
+ endif
+ ifneq ($(libs_build),)
+-- 
+2.34.1
+
