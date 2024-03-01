@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-PODMAN_VERSION = daf7a2c069a994f873d7c8b3409946318e674dcc
-PODMAN_SITE = $(call github,containers,podman,$(PODMAN_VERSION))
+PODMAN_VERSION = 4.9.3
+PODMAN_SITE = $(call github,containers,podman,v$(PODMAN_VERSION))
 PODMAN_LICENSE = Apache-2.0
 PODMAN_LICENSE_FILES = LICENSE
 
@@ -72,4 +72,13 @@ define PODMAN_INSTALL_INIT_SYSTEMD
 		install.systemd
 endef
 
+HOST_PODMAN_BUILD_TARGETS = cmd/podman
+HOST_PODMAN_DEPENDENCIES += host-libglib2 host-libgpgme
+HOST_PODMAN_LDFLAGS = $(PODMAN_LDFLAGS)
+HOST_PODMAN_GO_ENV = GOFLAGS="-mod=mod" GOPROXY=direct
+HOST_PODMAN_TAGS = exclude_graphdriver_zfs \
+		exclude_graphdriver_btrfs \
+		exclude_graphdriver_vfs
+
 $(eval $(golang-package))
+$(eval $(host-golang-package))

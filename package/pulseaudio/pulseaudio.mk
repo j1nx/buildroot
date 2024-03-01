@@ -129,12 +129,12 @@ else
 PULSEAUDIO_CONF_OPTS += -Dudev=disabled
 endif
 
-ifeq ($(BR2_PACKAGE_WEBRTC_AUDIO_PROCESSING),y)
-PULSEAUDIO_CONF_OPTS += -Dwebrtc-aec=enabled
-PULSEAUDIO_DEPENDENCIES += webrtc-audio-processing
-else
-PULSEAUDIO_CONF_OPTS += -Dwebrtc-aec=disabled
-endif
+#ifeq ($(BR2_PACKAGE_WEBRTC_AUDIO_PROCESSING),y)
+#PULSEAUDIO_CONF_OPTS += -Dwebrtc-aec=enabled
+#PULSEAUDIO_DEPENDENCIES += webrtc-audio-processing
+#else
+#PULSEAUDIO_CONF_OPTS += -Dwebrtc-aec=disabled
+#endif
 
 # our Config.in makes sure that all needed alsa-lib features are
 # enabled
