@@ -1,13 +1,13 @@
 config BR2_PACKAGE_PODMAN
 	bool "podman"
-	depends on !BR2_TOOLCHAIN_USES_UCLIBC # no fexecve
 	depends on BR2_PACKAGE_HOST_GO_TARGET_ARCH_SUPPORTS
 	depends on BR2_PACKAGE_HOST_GO_TARGET_CGO_LINKING_SUPPORTS
-	depends on BR2_TOOLCHAIN_HAS_THREADS # conmon -> libglib2
-	depends on BR2_USE_MMU # libgpgme, conmon -> libglib2
-	depends on BR2_USE_WCHAR # conmon -> libglib2
+#	depends on BR2_TOOLCHAIN_HAS_THREADS # conmon -> libglib2
+#	depends on BR2_USE_MMU # libgpgme, conmon -> libglib2
+#	depends on BR2_USE_WCHAR # conmon -> libglib2
+	select BR2_PACKAGE_ARGP_STANDALONE if !BR2_TOOLCHAIN_USES_GLIBC
 	select BR2_PACKAGE_CGROUPFS_MOUNT if !BR2_PACKAGE_SYSTEMD # runtime
-	select BR2_PACKAGE_CNI_PLUGINS
+#	select BR2_PACKAGE_CNI_PLUGINS
 	select BR2_PACKAGE_CONMON
 	select BR2_PACKAGE_CRUN
 	select BR2_PACKAGE_IPTABLES
