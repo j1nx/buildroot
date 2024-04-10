@@ -18,6 +18,10 @@ PODMAN_LDFLAGS = \
 	-X $(PODMAN_GOMOD)/libpod/define.gitCommit=$(PODMAN_VERSION)
 PODMAN_TAGS = exclude_graphdriver_zfs
 
+ifeq ($(BR2_PACKAGE_ARGP_STANDALONE),y)
+PODMAN_DEPENDENCIES += argp-standalone
+endif
+
 ifeq ($(BR2_INIT_SYSTEMD),y)
 PODMAN_TAGS += systemd
 endif
