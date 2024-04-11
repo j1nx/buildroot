@@ -4,13 +4,13 @@
 #
 ################################################################################
 
-PODMAN_VERSION = 4.9.3
+PODMAN_VERSION = 5.0.1
 PODMAN_SITE = $(call github,containers,podman,v$(PODMAN_VERSION))
 PODMAN_LICENSE = Apache-2.0
 PODMAN_LICENSE_FILES = LICENSE
 
 PODMAN_CPE_ID_VENDOR = podman_project
-PODMAN_GOMOD = github.com/containers/podman/v4
+PODMAN_GOMOD = github.com/containers/podman/v5
 
 PODMAN_BUILD_TARGETS = cmd/podman cmd/rootlessport cmd/quadlet
 PODMAN_DEPENDENCIES += libglib2 libgpgme
@@ -62,10 +62,6 @@ endif
 define PODMAN_INSTALL_TARGET_CMDS
 	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR=$(TARGET_DIR) PREFIX=/usr \
 		install.bin
-	$(INSTALL) -d -m 700 $(TARGET_DIR)/etc/cni
-	$(INSTALL) -d -m 700 $(TARGET_DIR)/etc/cni/net.d
-	$(INSTALL) -D -m 644 $(@D)/cni/87-podman-bridge.conflist \
-		$(TARGET_DIR)/etc/cni/net.d/87-podman-bridge.conflist
 	$(INSTALL) -d -m 755 $(TARGET_DIR)/etc/containers
 	$(INSTALL) -D -m 644 $(PODMAN_PKGDIR)/containers-policy.json \
 		$(TARGET_DIR)/etc/containers/policy.json
