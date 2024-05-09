@@ -775,15 +775,6 @@ N:	Dario Binacchi <dariobin@libero.it>
 F:	package/uboot-bootcount/
 F:	package/libmnl/
 
-N:	David Bachelart <david.bachelart@bbright.com>
-F:	package/ccrypt/
-F:	package/dos2unix/
-F:	package/ipmiutil/
-F:	package/jsmn/
-F:	package/python-daemon/
-F:	package/sslh/
-F:	package/udpxy/
-
 N:	David Bender <codehero@gmail.com>
 F:	package/benejson/
 F:	package/cgic/
@@ -1791,6 +1782,7 @@ F:	support/testing/tests/package/test_cryptsetup/
 F:	support/testing/tests/package/test_ddrescue.py
 F:	support/testing/tests/package/test_ddrescue/
 F:	support/testing/tests/package/test_dos2unix.py
+F:	support/testing/tests/package/test_ed.py
 F:	support/testing/tests/package/test_file.py
 F:	support/testing/tests/package/test_file/
 F:	support/testing/tests/package/test_fluidsynth.py
@@ -1824,6 +1816,8 @@ F:	support/testing/tests/package/test_libgpgme.py
 F:	support/testing/tests/package/test_libjxl.py
 F:	support/testing/tests/package/test_lrzip.py
 F:	support/testing/tests/package/test_ltrace.py
+F:	support/testing/tests/package/test_lvm2.py
+F:	support/testing/tests/package/test_lvm2/
 F:	support/testing/tests/package/test_lzip.py
 F:	support/testing/tests/package/test_lsof.py
 F:	support/testing/tests/package/test_lz4.py
@@ -2965,47 +2959,6 @@ F:	package/fcgiwrap/
 F:	package/openlayers/
 F:	package/vuejs/
 F:	package/vuejs-router/
-
-N:	Thomas De Schampheleire <thomas.de_schampheleire@nokia.com>
-F:	docs/manual/
-F:	package/cereal/
-F:	package/chartjs/
-F:	package/datatables/
-F:	package/datatables-buttons/
-F:	package/datatables-fixedcolumns/
-F:	package/datatables-responsive/
-F:	package/jszip/
-F:	package/libtelnet/
-F:	package/opkg-utils/
-F:	package/perl-convert-asn1/
-F:	package/perl-crypt-blowfish/
-F:	package/perl-crypt-cbc/
-F:	package/perl-crypt-openssl-aes/
-F:	package/perl-devel-cycle/
-F:	package/perl-devel-size/
-F:	package/perl-i18n/
-F:	package/perl-locale-maketext-lexicon/
-F:	package/perl-lwp-protocol-https/
-F:	package/perl-math-int64/
-F:	package/perl-math-prime-util/
-F:	package/perl-mime-base64-urlsafe/
-F:	package/perl-mojolicious-plugin-authentication/
-F:	package/perl-mojolicious-plugin-authorization/
-F:	package/perl-mojolicious-plugin-cspheader/
-F:	package/perl-mojolicious-plugin-i18n/
-F:	package/perl-mojolicious-plugin-securityheader/
-F:	package/perl-mozilla-ca/
-F:	package/perl-net-snmp/
-F:	package/perl-net-ssh2/
-F:	package/perl-net-telnet/
-F:	package/perl-path-class/
-F:	package/pigz/
-F:	package/popperjs/
-F:	package/xenomai/
-F:	support/scripts/size-stats
-F:	support/testing/tests/package/test_perl_lwp_protocol_https.py
-F:	utils/size-stats-compare
-F:	toolchain/
 
 N:	Thomas Devoogdt <thomas@devoogdt.com>
 F:	package/fluent-bit/
