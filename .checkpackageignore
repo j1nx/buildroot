@@ -307,7 +307,6 @@ package/dmalloc/0004-Makefile-use-the-configure-detected-or-user-supplied.patch 
 package/dmalloc/0005-configure-use-LD-instead-of-hard-coding-ld.patch Upstream
 package/dmraid/0001-fix-compilation-under-musl.patch Upstream
 package/dmraid/S20dmraid Variables
-package/dnsmasq/S80dnsmasq Shellcheck
 package/docker-engine/S60dockerd Indent Shellcheck Variables
 package/docopt-cpp/0001-only-build-one-target-use-BUILD_SHARED_LIBS-where-appropriate.patch Upstream
 package/domoticz/S99domoticz Shellcheck
@@ -423,7 +422,7 @@ package/gamin/0003-fix-missing-PTHREAD_MUTEX_RECURSIVE_NP.patch Upstream
 package/gcc/11.4.0/0001-or1k-Add-mcmodel-option-to-handle-large-GOTs.patch Upstream
 package/gcc/11.4.0/0004-disable-split-stack-for-non-thread-builds.patch Upstream
 package/gcc/12.3.0/0001-disable-split-stack-for-non-thread-builds.patch Upstream
-package/gcc/13.2.0/0001-disable-split-stack-for-non-thread-builds.patch Upstream
+package/gcc/13.3.0/0001-disable-split-stack-for-non-thread-builds.patch Upstream
 package/gcc/8.4.0/0001-xtensa-fix-PR-target-91880.patch Upstream
 package/gcc/8.4.0/0002-Revert-re-PR-target-92095-internal-error-with-O1-mcp.patch Upstream
 package/gcc/8.4.0/0003-libsanitizer-Remove-cyclades-from-libsanitizer.patch Upstream
@@ -642,7 +641,6 @@ package/libloki/0001-allow-to-install-to-a-specific-location-using-DESTDI.patch 
 package/libloki/0002-use-ln-snf.patch Upstream
 package/libmad/0001-mips-h-constraint-removal.patch Sob Upstream
 package/libmad/0002-configure-ac-automake-foreign.patch Upstream
-package/libmanette/0001-Meson-Un-hardcode-building-a-shared-library.patch Upstream
 package/libmng/0001-jpeg-9a.patch Upstream
 package/libmodsecurity/0001-configure.ac-drop-usage-of-git-at-configure-time.patch Upstream
 package/libmodsecurity/0002-modsecurity.pc.in-add-lstdc.patch Upstream
@@ -1081,7 +1079,6 @@ package/python3/0028-fix-building-on-older-distributions.patch Upstream
 package/python3/0029-configure.ac-fixup-CC-print-multiarch-output-for-mus.patch Upstream
 package/python3/0030-Add-an-option-to-disable-the-berkeleydb-module.patch Upstream
 package/python3/0031-lib-crypt-uClibc-ng-doesn-t-set-errno-when-encryptio.patch Upstream
-package/qemu/0001-tests-fp-disable-fp-bench-build-by-default.patch Upstream
 package/qemu/0002-softmmu-qemu-seccomp.c-add-missing-header-for-CLONE_.patch Upstream
 package/qextserialport/0001-Create-a-main-include-file-QExtSerialPort.patch Upstream
 package/qextserialport/0002-Tell-qmake-to-add-a-pkgconfig-file-to-ease-usage-wit.patch Upstream
@@ -1264,7 +1261,6 @@ package/tinyalsa/0001-include-time.h-before-asound.h.patch Upstream
 package/tinycbor/0001-Makefile-add-DISABLE_WERROR.patch Upstream
 package/tinycompress/0001-wave-add-time.h-missing-header-inclusion.patch Upstream
 package/tinydtls/0001-sha2-sha2.c-fix-build-on-big-endian.patch Upstream
-package/tinyproxy/0001-prevent-junk-from-showing-up-in-error-page-in-invalid-requests.patch Upstream
 package/tinyxml/0001-In-stamp-always-advance-the-pointer-if-p-0xef.patch Upstream
 package/tpm2-abrmd/S80tpm2-abrmd Indent Shellcheck Variables
 package/tpm2-tss/0001-Temporary-fix-for-build-without-C.patch Upstream
