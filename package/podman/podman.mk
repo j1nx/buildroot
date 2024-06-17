@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-PODMAN_VERSION = 5.0.1
+PODMAN_VERSION = 5.1.1
 PODMAN_SITE = $(call github,containers,podman,v$(PODMAN_VERSION))
 PODMAN_LICENSE = Apache-2.0
 PODMAN_LICENSE_FILES = LICENSE
