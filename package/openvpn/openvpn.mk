@@ -4,7 +4,11 @@
 #
 ################################################################################
 
+<<<<<<< HEAD
 OPENVPN_VERSION = 2.6.12
+=======
+OPENVPN_VERSION = 2.6.11
+>>>>>>> b61fcc8902 (package/openvpn: security bump version to 2.6.11)
 OPENVPN_SITE = https://swupdate.openvpn.net/community/releases
 OPENVPN_DEPENDENCIES = host-pkgconf libcap-ng
 OPENVPN_LICENSE = GPL-2.0
