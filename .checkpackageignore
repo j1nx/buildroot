@@ -26,7 +26,6 @@ board/canaan/k210-soc/post-build.sh Shellcheck
 board/canaan/k210-soc/rootfs_overlay/sbin/init Shellcheck
 board/chromebook/elm/sign.sh Shellcheck
 board/chromebook/mksd.sh Shellcheck
-board/chromebook/snow/linux-4.15-dts-tpm.patch ApplyOrder Upstream
 board/chromebook/snow/sign.sh Shellcheck
 board/ci20/patches/uboot/0001-mips-Remove-default-endiannes.patch Upstream
 board/cubietech/cubieboard2/post-image.sh Shellcheck
@@ -419,7 +418,7 @@ package/gamin/0002-no-const-return.patch Sob Upstream
 package/gamin/0003-fix-missing-PTHREAD_MUTEX_RECURSIVE_NP.patch Upstream
 package/gcc/11.4.0/0001-or1k-Add-mcmodel-option-to-handle-large-GOTs.patch Upstream
 package/gcc/11.4.0/0004-disable-split-stack-for-non-thread-builds.patch Upstream
-package/gcc/12.3.0/0001-disable-split-stack-for-non-thread-builds.patch Upstream
+package/gcc/12.4.0/0001-disable-split-stack-for-non-thread-builds.patch Upstream
 package/gcc/13.3.0/0001-disable-split-stack-for-non-thread-builds.patch Upstream
 package/gcc/8.4.0/0001-xtensa-fix-PR-target-91880.patch Upstream
 package/gcc/8.4.0/0002-Revert-re-PR-target-92095-internal-error-with-O1-mcp.patch Upstream
@@ -1387,7 +1386,6 @@ package/x11r7/xserver_xorg-server/0001-include-misc.h-fix-uClibc-build.patch Ups
 package/x11r7/xserver_xorg-server/S40xorg Shellcheck Variables
 package/x11vnc/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch Upstream
 package/x11vnc/0002-scan-limit-access-to-shared-memory-segments-to-current-user.patch Upstream
-package/x265/0001-fix-gcc-options.patch Upstream
 package/xen/0001-9pfs-include-linux-limits.h-for-XATTR_SIZE_MAX.patch Upstream
 package/xen/0002-Fix-build-with-64-bits-time_t.patch Upstream
 package/xen/0003-libs-light-fix-tv_sec-printf-format.patch Upstream

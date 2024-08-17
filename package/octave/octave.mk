@@ -43,6 +43,20 @@ else
 OCTAVE_CONF_OPTS += --without-curl
 endif
 
+ifeq ($(BR2_PACKAGE_LIBSNDFILE),y)
+OCTAVE_CONF_OPTS += --with-sndfile
+OCTAVE_DEPENDENCIES += libsndfile
+else
+OCTAVE_CONF_OPTS += --without-sndfile
+endif
+
+ifeq ($(BR2_PACKAGE_OPENSSL),y)
+OCTAVE_CONF_OPTS += --with-openssl=yes
+OCTAVE_DEPENDENCIES += openssl
+else
+OCTAVE_CONF_OPTS += --without-openssl
+endif
+
 ifeq ($(BR2_PACKAGE_READLINE),y)
 OCTAVE_CONF_OPTS += \
 	--enable-readline \
