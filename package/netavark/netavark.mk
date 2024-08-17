@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-NETAVARK_VERSION = 1.11.0
+NETAVARK_VERSION = 1.12.1
 NETAVARK_SITE = $(call github,containers,netavark,v$(NETAVARK_VERSION))
 NETAVARK_DEPENDENCIES = host-rustc host-pkgconf protobuf
 
