@@ -30,10 +30,10 @@ PROCPS_NG_CONF_OPTS += --exec-prefix=/ \
 	--libdir=/usr/lib
 
 # Allows unicode characters to show in 'watch'
-ifeq ($(BR2_PACKAGE_NCURSES_WCHAR),y)
-PROCPS_NG_CONF_OPTS += \
-	--enable-watch8bit
-endif
+#ifeq ($(BR2_PACKAGE_NCURSES_WCHAR),y)
+#PROCPS_NG_CONF_OPTS += \
+#	--enable-watch8bit
+#endif
 
 ifeq ($(BR2_USE_WCHAR),)
 PROCPS_NG_CONF_OPTS += CPPFLAGS=-DOFF_XTRAWIDE
