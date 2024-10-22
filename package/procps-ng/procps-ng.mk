@@ -21,9 +21,6 @@ PROCPS_NG_LIBS=$(TARGET_NLS_LIBS)
 # Applying 0004-build-sys-Fix-define-of-HAVE_PIDFD_OPEN.patch touches configure.ac
 PROCPS_NG_AUTORECONF = YES
 
-# Applying 0001-build-sys-Add-systemd-elogind-to-w.patch touches Makefile.am
-PROCPS_NG_AUTORECONF = YES
-
 ifeq ($(BR2_PACKAGE_SYSTEMD),y)
 PROCPS_NG_DEPENDENCIES += systemd
 PROCPS_NG_CONF_OPTS += --with-systemd
