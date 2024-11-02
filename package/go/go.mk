@@ -102,11 +102,6 @@ endif # BR2_PACKAGE_HOST_GO_TARGET_ARCH_SUPPORTS
 # Ensure the toolchain is available, whatever the provider
 HOST_GO_DEPENDENCIES += $(HOST_GO_DEPENDENCIES_CGO)
 
-ifeq ($(HOST_GO_CGO_ENABLED),1)
-# For cgo support the toolchain needs to be available.
-HOST_GO_DEPENDENCIES += toolchain
-endif
-
 # For the convenience of host golang packages
 HOST_GO_HOST_ENV = \
 	$(HOST_GO_COMMON_ENV) \
