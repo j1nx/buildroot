@@ -9,6 +9,10 @@ BRCMFMAC_SDIO_FIRMWARE_RPI_SITE = $(call github,LibreELEC,brcmfmac_sdio-firmware
 BRCMFMAC_SDIO_FIRMWARE_RPI_LICENSE = PROPRIETARY
 BRCMFMAC_SDIO_FIRMWARE_RPI_LICENSE_FILES = LICENSE
 
+# If you ever need to adjust the symlinks below, you may find handy the
+# following one-liner (adjust "-not" and "-name" options as needed):
+# find firmware/brcm/* -type l -not -name *.hcd -exec sh -c 'echo ln -sf $(readlink $1) \$\(TARGET_DIR\)/lib/$1' _ {} \;
+
 ifeq ($(BR2_PACKAGE_BRCMFMAC_SDIO_FIRMWARE_RPI_BT),y)
 define BRCMFMAC_SDIO_FIRMWARE_RPI_INSTALL_TARGET_BT
 	$(INSTALL) -d $(TARGET_DIR)/lib/firmware/brcm $(TARGET_DIR)/lib/firmware/synaptics
