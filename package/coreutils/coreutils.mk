@@ -148,7 +148,6 @@ HOST_COREUTILS_CONF_OPTS = \
 	--disable-libcap \
 	--disable-rpath \
 	--disable-single-binary \
-	--disable-xattr \
 	--without-gmp \
 	--enable-install-program=ln,realpath \
 	--enable-no-install-program=date
