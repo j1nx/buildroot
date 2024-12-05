@@ -473,15 +473,6 @@ define LINUX_INSTALL_DTB
 	)
 endef
 endif # BR2_LINUX_KERNEL_APPENDED_DTB
-ifeq ($(BR2_LINUX_KERNEL_INSTALL_INTREE_OVERLAYS),y)
-define LINUX_INSTALL_OVERLAYS
-	echo "Installing  overlays" 1>&2;
-	$(foreach ovldtb,$(wildcard $(LINUX_ARCH_PATH)/boot/dts/overlays/*.dtbo), \
-		$(INSTALL) -D -m 0644 $(ovldtb) $(1)/overlays/$(notdir $(ovldtb))
-	)
-	$(INSTALL) -D -m 0644 $(LINUX_ARCH_PATH)/boot/dts/overlays/overlay_map.dtb $(1)/overlays/
-endef
-endif # BR2_LINUX_KERNEL_INSTALL_INTREE_OVERLAYS
 endif # BR2_LINUX_KERNEL_DTB_IS_SELF_BUILT
 endif # BR2_LINUX_KERNEL_DTS_SUPPORT
 
@@ -565,18 +556,19 @@ define LINUX_INSTALL_HOST_TOOLS
 	fi
 endef
 
-define LINUX_INSTALL_IMAGES_CMDS
-	$(call LINUX_INSTALL_IMAGE,$(BINARIES_DIR))
-	$(call LINUX_INSTALL_DTB,$(BINARIES_DIR))
-	$(call LINUX_INSTALL_OVERLAYS,$(BINARIES_DIR))
-endef
-
 define LINUX_INSTALL_OVERLAYS
         echo "Installing  overlays" 1>&2;
+	rm -rf $(1)/overlays
         $(foreach ovldtb,$(wildcard $(LINUX_ARCH_PATH)/boot/dts/overlays/*.dtbo), \
                 $(INSTALL) -D -m 0644 $(ovldtb) $(1)/overlays/$(notdir $(ovldtb))
         )
         $(INSTALL) -D -m 0644 $(LINUX_ARCH_PATH)/boot/dts/overlays/overlay_map.dtb $(1)/overlays/
+endef
+
+define LINUX_INSTALL_IMAGES_CMDS
+	$(call LINUX_INSTALL_IMAGE,$(BINARIES_DIR))
+	$(call LINUX_INSTALL_DTB,$(BINARIES_DIR))
+	$(call LINUX_INSTALL_OVERLAYS,$(BINARIES_DIR))
 endef
 
 ifeq ($(BR2_STRIP_strip),y)
@@ -694,6 +686,7 @@ linux-rebuild-with-initramfs:
 	$(LINUX_MAKE_ENV) $(BR2_MAKE) $(LINUX_MAKE_FLAGS) -C $(LINUX_DIR) $(LINUX_TARGET_NAME)
 	$(LINUX_APPEND_DTB)
 	# Copy the kernel image(s) to its(their) final destination
-	$(call LINUX_INSTALL_IMAGE,$(BINARIES_DIR))
+	#$(call LINUX_INSTALL_IMAGE,$(BINARIES_DIR))
+	$(call LINUX_INSTALL_IMAGE,$(TARGET_DIR)/boot)
 	# If there is a .ub file copy it to the final destination
 	test ! -f $(LINUX_IMAGE_PATH).ub || cp $(LINUX_IMAGE_PATH).ub $(BINARIES_DIR)
