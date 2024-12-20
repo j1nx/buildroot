@@ -6,14 +6,19 @@
 
 GRUB2_VERSION = 2.12
 GRUB2_SITE = $(BR2_GNU_MIRROR)/grub
-GRUB2_SOURCE = grub-$(GRUB2_VERSION).tar.xz
 GRUB2_LICENSE = GPL-3.0+
 GRUB2_LICENSE_FILES = COPYING
-GRUB2_DEPENDENCIES = host-bison host-flex host-gawk host-grub2 \
+GRUB2_DEPENDENCIES = host-bison host-flex host-gawk host-grub2 xz \
 	$(BR2_PYTHON3_HOST_DEPENDENCY)
-HOST_GRUB2_DEPENDENCIES = host-bison host-flex host-gawk \
+HOST_GRUB2_DEPENDENCIES = host-bison host-flex host-gawk host-xz \
 	$(BR2_PYTHON3_HOST_DEPENDENCY)
 GRUB2_INSTALL_IMAGES = YES
+
+define GRUB2_RUN_AUTOGEN
+	cd $(@D)/ && PATH=$(BR_PATH) ./bootstrap
+endef
+GRUB2_PRE_CONFIGURE_HOOKS += GRUB2_RUN_AUTOGEN
+HOST_GRUB2_PRE_CONFIGURE_HOOKS += GRUB2_RUN_AUTOGEN
 
 # CVE-2019-14865 is about a flaw in the grub2-set-bootflag tool, which
 # doesn't exist upstream, but is added by the Redhat/Fedora
@@ -136,10 +141,10 @@ HOST_GRUB2_CONF_OPTS = \
 	--with-platform=none \
 	--disable-grub-mkfont \
 	--enable-efiemu=no \
-	ac_cv_lib_lzma_lzma_code=no \
 	--enable-device-mapper=no \
 	--enable-libzfs=no \
-	--disable-werror
+	--disable-werror \
+	--enable-liblzma
 
 define GRUB2_CONFIGURE_CMDS
 	$(foreach tuple, $(GRUB2_TUPLES-y), \
@@ -158,10 +163,10 @@ define GRUB2_CONFIGURE_CMDS
 			--exec-prefix=/ \
 			--disable-grub-mkfont \
 			--enable-efiemu=no \
-			ac_cv_lib_lzma_lzma_code=no \
 			--enable-device-mapper=no \
 			--enable-libzfs=no \
-			--disable-werror
+			--disable-werror \
+			--enable-liblzma
 	)
 endef
 
