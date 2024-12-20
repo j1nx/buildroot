@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-AARDVARK_DNS_VERSION = 1.13.0
+AARDVARK_DNS_VERSION = 1.13.1
 AARDVARK_DNS_SITE = $(call github,containers,aardvark-dns,v$(AARDVARK_DNS_VERSION))
 AARDVARK_DNS_DEPENDENCIES = host-rustc host-pkgconf
 
