@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-GRUB2_VERSION = 04a22fab2d7357709f97d3d936611f26a427cfd4
+GRUB2_VERSION = 35566b087e4d52f30f98775236fa9659f00fbb04
 GRUB2_SITE = $(call github,j1nx,grub2,$(GRUB2_VERSION))
-GRUB2_SOURCE = grub-$(GRUB2_VERSION).tar.xz
 GRUB2_LICENSE = GPL-3.0+
 GRUB2_LICENSE_FILES = COPYING
 GRUB2_DEPENDENCIES = host-bison host-flex host-gawk host-grub2 xz \
