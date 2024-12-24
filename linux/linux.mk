@@ -679,7 +679,12 @@ $(eval $(kconfig-package))
 .PHONY: linux-rebuild-with-initramfs
 linux-rebuild-with-initramfs: $(LINUX_DIR)/.stamp_target_installed
 linux-rebuild-with-initramfs: $(LINUX_DIR)/.stamp_images_installed
+ifeq ($(BR2_TARGET_ROOTFS_INITRAMFS_CPIO),y)
 linux-rebuild-with-initramfs: rootfs-cpio
+endif
+ifeq ($(BR2_TARGET_ROOTFS_INITRAMFS_DRACUT),y)
+linux-rebuild-with-initramfs: rootfs-dracut
+endif
 linux-rebuild-with-initramfs:
 	@$(call MESSAGE,"Rebuilding kernel with initramfs")
 	# Build the kernel.

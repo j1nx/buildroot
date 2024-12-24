@@ -15,7 +15,7 @@ install() {
     # non-merged-usr initramfs, even though the current config
     # is for a merged-usr system.
     # So undo its borkage.
-    for dir in lib bin sbin; do
+    for dir in lib lib64 bin sbin; do
         mkdir -p "${initdir?}/usr/${dir}"
         if [ -d "${initdir?}/${dir}" ]; then
             mv "${initdir?}/${dir}/"* "${initdir?}/usr/${dir}"
