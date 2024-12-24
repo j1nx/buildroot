@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-GRUB2_VERSION = 35566b087e4d52f30f98775236fa9659f00fbb04
+GRUB2_VERSION = 209a748862d82cd06fcac762b3f0febcec0fb4da
 GRUB2_SITE = $(call github,j1nx,grub2,$(GRUB2_VERSION))
 GRUB2_LICENSE = GPL-3.0+
 GRUB2_LICENSE_FILES = COPYING
